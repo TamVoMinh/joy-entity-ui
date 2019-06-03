@@ -1,0 +1,31 @@
+@import "./ManageEntity/DataTable/index.scss";
+@import "./ManageEntity/index.scss";
+
+.form-group {
+    &.has-danger{
+        .invalid-feedback{
+            display: block;
+        }
+    }
+}
+
+.modal-open {
+    .modal {
+        display: flex;
+        &.fade.show {
+            visibility: visible;
+        }
+        &:not(.show){
+            visibility: hidden;
+            transition: all 0.5s;
+        }
+    }
+}
+
+.nav-item{
+    .nav-link{
+        &.active{
+            border-bottom: solid 1px;
+        }
+    }
+}

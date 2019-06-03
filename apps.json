@@ -1,0 +1,26 @@
+
+{
+    "apps": [
+      {
+        "name": "dev-server",
+        "script": "./server.js",
+        "watch": true,
+        "cwd": ".",
+        "env": {
+          "DEBUG": "*"
+        },
+        "instance_var": "INSTANCE_ID"
+      },
+      {
+        "name": "api-server",
+        "script": "./example/api/index.js",
+        "watch": true,
+        "cwd": ".",
+        "env": {
+          "DEBUG": "*"
+        },
+        "instance_var": "INSTANCE_ID"
+      }
+    ]
+  }
+  
