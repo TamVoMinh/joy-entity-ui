@@ -21,14 +21,13 @@ See in example
 
 ## Run demo
 ```shell
-$ git clone https://github.com/TamVoMinh/joy-ui
+$ git clone https://github.com/TamVoMinh/joy-ui.git
 $ cd joy-ui
 $ npm install
+$ yarn start:api
+Open new terminal with same directory
 $ yarn start
-< open new terminal window >$ yarn start:api
 ```
-Then access to http://localhost:3000
-
 ## Build component
 ```shell
 yarn build:component
