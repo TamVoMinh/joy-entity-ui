@@ -1,7 +1,7 @@
 import React from 'react';
 import { WithModal } from '../Modal';
-import DataTable from './DataTable';
-import { hashObject } from 'components/util';
+import DataTable from '../DataTable';
+import { hashObject } from '../util';
 
 
 class List extends React.Component {
@@ -18,7 +18,7 @@ class List extends React.Component {
                 onSave: this.saveEntity
             });
         } else {
-            history.push(`${url}/${data.id ? data.id : 'new'}/details`);
+            history.push(`${url === '/' ? '' : url}/${data.id ? data.id : 'new'}/details`);
         }
     };
 

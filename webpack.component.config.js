@@ -1,9 +1,10 @@
 var path = require('path');
-var webpack = require('webpack');
-
-var config =  {
+var config = {
   devtool: 'source-map',
-  entry: './src/lib/index.jsx',
+  entry: {
+    index: './src/components/index.js',
+    store: './src/store/index.js'
+  },
   module: {
     rules: [
       {
@@ -12,65 +13,77 @@ var config =  {
         use: ['babel-loader']
       },
       {
-        test: /\.pegjs$/i,
-        use: 'raw-loader',
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ],
       },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ]
+      }
     ]
   },
   resolve: {
     extensions: ['*', '.js', '.jsx']
   },
-   externals: {
+  externals: {
     immutable: {
-      root: 'immutable',
+      root: 'Immutable',
       commonjs: 'immutable',
       commonjs2: 'immutable',
-      amd: 'immutable'
+      amd: 'immutable',
+      umd: 'immutable'
     },
     'joy-query-box': {
-      root: 'joy-query-box',
+      root: 'JoyQueryBox',
       commonjs: 'joy-query-box',
       commonjs2: 'joy-query-box',
-      amd: 'joy-query-box'
+      amd: 'joy-query-box',
+      umd: 'joy-query-box'
     },
     'lodash.throttle': {
-      root: 'lodash.throttle',
+      root: 'throttle',
       commonjs: 'lodash.throttle',
       commonjs2: 'lodash.throttle',
-      amd: 'lodash.throttle'
+      amd: 'lodash.throttle',
+      umd: 'lodash.throttle'
     },
     'prop-types': {
-      root: 'prop-types',
+      root: 'PropTypes',
       commonjs: 'prop-types',
       commonjs2: 'prop-types',
-      amd: 'prop-types'
+      amd: 'prop-types',
+      umd: 'prop-types'
     },
     react: {
       root: 'React',
       commonjs: 'react',
       commonjs2: 'react',
-      amd: 'react'
+      amd: 'react',
+      umd: 'react',
     },
     'react-dom': {
       root: 'ReactDOM',
       commonjs: 'react-dom',
       commonjs2: 'react-dom',
-      amd: 'react-dom'
+      amd: 'react-dom',
+      umd: 'react-dom',
     },
     'react-datepicker': {
-      root: 'react-datepicker',
+      root: 'ReactDatePicker',
       commonjs: 'react-datepicker',
       commonjs2: 'react-datepicker',
-      amd: 'react-datepicker'
-    },
-    'react-router-dom': {
-      root: 'react-router-dom',
-      commonjs: 'react-router-dom',
-      commonjs2: 'react-router-dom',
-      amd: 'react-router-dom'
+      amd: 'react-datepicker',
+      umd: 'react-datepicker'
     },
     'react-draggable': {
-      root: 'react-draggable',
+      root: 'Draggable',
       commonjs: 'react-draggable',
       commonjs2: 'react-draggable',
       amd: 'react-draggable'
@@ -80,12 +93,6 @@ var config =  {
       commonjs: 'react-virtualized',
       commonjs2: 'react-virtualized',
       amd: 'react-virtualized'
-    },
-    'js-base64': {
-      root: 'js-base64',
-      commonjs: 'js-base64',
-      commonjs2: 'js-base64',
-      amd: 'js-base64'
     }
   },
 
@@ -100,8 +107,8 @@ var config =  {
   },
   output: {
     path: path.join(__dirname, './lib'),
-    filename: 'index.js',
-    library: 'joy-entity-ui',
+    filename: '[name].js',
+    library: 'joy-ui',
     libraryTarget: 'commonjs2'
   },
 }

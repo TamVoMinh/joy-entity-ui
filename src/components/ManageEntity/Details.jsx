@@ -1,12 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
 class Details extends React.Component {
+
     shouldComponentUpdate(nextProps) {
         return nextProps.entity !== this.props.entity;
     }
     render() {
-        const { meta, form, title, icon, entity, match: { params }, entityUrl } = this.props;
+        const { meta, form, title, icon, entity, match: { params }, entityUrl, Link } = this.props;
         const entityData = entity.get('list').find(i => i.id === params.id) || meta.default;
         const outOfUpateId = entity.get('outOfUpateId');
         const refresh_btn = outOfUpateId === params.id

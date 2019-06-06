@@ -79,6 +79,7 @@ const EmployeeModel = withFormik({
     validationSchema: employeeSchema,
     mapPropsToValues: props => props.data,
     handleSubmit: async (values, { props, setSubmitting, setErrors }) => {
+        console.log('handleSubmit');
         const hashValue = await hashObject(values);
         if (hashValue !== props.hashing) {
             await props.onSave(values);
@@ -155,7 +156,7 @@ const EmployeeForm = props => {
                 <div className="col-md-12 d-flex justify-content-center">
                     <button
                         type="submit"
-                        className="btn btn-sm btn-rose"
+                        className="btn btn-sm btn-primary"
                         disabled={isSubmitting || !dirty}
                     >
                         Save
@@ -170,7 +171,7 @@ const SubHeader = ({ title }) => {
     return (
         <div className="sub-header d-flex flex-row shadow bg-white border rounded">
             <div className="card-icon">
-                <i className="material-icons">beach_access</i>
+                <i className="material-icons">people</i>
             </div>
             <div className="flex-grow-1">
                 <nav aria-label="breadcrumb" role="navigation">
@@ -190,8 +191,9 @@ export const Employee = () => {
             {
                 ManageEntity({
                     title,
-                    meta, form: EmployeeModel(EmployeeForm),
-                    useModal: true,
+                    meta, 
+                    form: EmployeeModel(EmployeeForm),
+                    useModal: false,
                     subheader: <SubHeader title={title}></SubHeader>
                 })
             }

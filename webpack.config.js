@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const publicPath = '/static';
+const path = require('path');
 console.log('root path',__dirname);
 module.exports = {
   mode:'development',
@@ -9,6 +10,7 @@ module.exports = {
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server'
   ],
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -18,7 +20,10 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [
+          'style-loader', 
+          'css-loader'
+        ],
       },
       {
         test: /\.scss$/,
@@ -35,7 +40,7 @@ module.exports = {
     extensions: ['*', '.js', '.jsx']
   },
   output: {
-    path: __dirname + '/dist',
+    path: path.resolve(__dirname, 'example','dist'),
     publicPath,
     filename: 'bundle.js'
   },
@@ -44,17 +49,14 @@ module.exports = {
   ],
   devServer: {
     hot:true,
-    open: 'Google Chrome', 
+    open: true, 
     host: '0.0.0.0',
-    public: '0.0.0.0:3000',
-    contentBase: './dist',
+    port: 3000,
+    public: 'localhost:3000',
+    contentBase: './example/public',
     publicPath,
     historyApiFallback: true,
-    proxy: {		
-      '/assets': {		
-          target: 'http://localhost:3000',		
-          pathRewrite: {'^/assets' : '/assets'}		
-       },
+    proxy: {
        '/entities':{
          target: 'http://localhost:3001'
        }	

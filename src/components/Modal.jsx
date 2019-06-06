@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { Spinner } from './Spinner';
 
 export const ModalContext = React.createContext({
@@ -109,7 +108,7 @@ const mapStateToProps = (state, ownProps) => {
     return { ui: state.get('ui').toJS() };
 };
 
-export const ModalProvider = withRouter(
+export const ModalProvider = withRouter => withRouter(
     connect(
         mapStateToProps,
         null
