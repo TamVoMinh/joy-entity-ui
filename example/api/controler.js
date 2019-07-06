@@ -115,6 +115,49 @@ exports.updateEmployee = {
   }
 };
 
+exports.getEmployee = {
+  path: '/employee/:id',
+  method: GET,
+  validate: {
+    params: {
+      id: NanoId.required()
+    },
+    output: {
+      200: {
+        body: OutputModel
+      }
+    },
+    continueOnError: false
+  },
+  handler: async ctx => {
+    const {
+      db,
+      params: { id },
+      invalid,
+      res
+    } = ctx;
+    if (invalid) {
+      throw {
+        ...INVALID_REQUEST,
+        details: invalid.params
+      };
+    }
+
+    const entity = await await db.Employee.findByPk(id);
+    if(entity) {
+      const data = entity.toJSON();
+      debug(data);
+      res.ok({ data });
+    }else{
+      throw {
+        statusCode: 404,
+        code: 'NOT_FOUND',
+      };
+    }
+  }
+};
+
+
 exports.queryEmployee = {
   path: '/employee',
   method: GET,

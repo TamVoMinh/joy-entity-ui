@@ -76,8 +76,7 @@ const limit = Joi.number()
   .integer()
   .min(5)
   .max(100)
-  .required()
-  .description('maximum page size is 100');
+  .required();
 
 const offset = Joi.number()
   .integer()

@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import qs from 'qs';
-const  API_URL = 'http://localhost:3001';
+const  API_URL = 'http://localhost:3000';
 const DEFAULT_OPTIONS = {
     method: 'GET',
     headers: {}

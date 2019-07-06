@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { withFormik } from 'formik';
-import { string, object, number, date } from 'yup';
+import { object, number, date } from 'yup';
 import { hashObject } from 'components/util';
 import ManageEntity from '../ManageEntity';
 import { TextBox, DatePicker } from 'components/form';
@@ -55,7 +55,6 @@ const meta = {
             filterable: true
         }
     },
-    paging: { offset: 0, limit: 20 },
     default: {
         position: '',
         salary: '',
@@ -66,9 +65,6 @@ const meta = {
 };
 
 const employeeSchema = object().shape({
-    position: string()
-        .max(256, 'Maximum length are 256 characters')
-        .required('position is required'),
     salary: number().required('Salary is required'),
     joinDate: date().required('Join Date date is required'),
     leaveDate: date().nullable(true),
@@ -77,9 +73,9 @@ const employeeSchema = object().shape({
 
 const EmployeeModel = withFormik({
     validationSchema: employeeSchema,
+    enableReinitialize:true,
     mapPropsToValues: props => props.data,
     handleSubmit: async (values, { props, setSubmitting, setErrors }) => {
-        console.log('handleSubmit');
         const hashValue = await hashObject(values);
         if (hashValue !== props.hashing) {
             await props.onSave(values);

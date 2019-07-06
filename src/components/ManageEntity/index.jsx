@@ -54,7 +54,7 @@ const ManageEntity = (Switch, Route, withRouter, Link, connector) => {
                                     headerHeight: 40,
                                     rowHeight: 35,
                                     disableHeader: false,
-                                    overscanRowCount: 50
+                                    overscanRowCount: 16
                                 }
                             })
                         }

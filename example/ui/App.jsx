@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { hot } from 'react-hot-loader';
+import { hot } from 'react-hot-loader'
 import './App.scss';
 import { ModalProvider } from 'components';
 import { Employee } from './Module/Employee';

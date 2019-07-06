@@ -12,7 +12,7 @@ import {
     node,
     instanceOf
 } from 'prop-types';
-import throttle from 'lodash.throttle';
+import debounce from 'lodash.debounce';
 import { Map } from 'immutable'
 import {
     AutoSizer,
@@ -27,6 +27,9 @@ import Draggable from "react-draggable";
 import JoyQueryBox from 'joy-query-box';
 import { date, text } from './renderer';
 import NoRow from './NoRow';
+
+const BATCH_SIZE = 3;
+const DEFUALT_PAGE_SIZE = 50;
 
 const ColType = {
     TEXT: 'text',
@@ -109,8 +112,11 @@ export default class DataTable extends React.Component {
         this.state = {
             meta: props.meta
         };
+        this.__pageSize = this.props.meta ? this.props.meta.size || DEFUALT_PAGE_SIZE : DEFUALT_PAGE_SIZE;
         this.__stack = [];
-        this.executeRequest = throttle(this.executeRequest, 200);
+        this.__batch = [];
+        this.__fetching=[];
+        this.executeRequest = debounce(this.executeRequest, 200);
         this.words = Object.entries(props.meta.fields).filter(([_, field]) => field.filterable) .map(([keyField, field]) => ({ word: keyField, desc: `column: ${field.label}` }));
     }
 
@@ -125,24 +131,25 @@ export default class DataTable extends React.Component {
     }
 
     isRowLoaded = ({ index }) => {
+        if(this.__stack.some(([start, stop])=> index >= start && index < stop)) return true;
+        if(this.__batch.some(([start, stop])=> index >= start && index < stop)) return true;
+        if(this.__fetching.some(([start, stop])=> index >= start && index < stop)) return true;
         return !!this.state.entity.get('list').get(index);
     };
 
-    loadMoreRows = ({ startIndex, stopIndex }) => {
-        this.stackRequest(startIndex, stopIndex);
-        this.executeRequest();
+    loadMoreRows = ({ startIndex }) => {
+        this.__stack.push([startIndex, startIndex + this.props.meta.size]);
+        this.executeRequest();    
     };
 
-    stackRequest = (start, stop) => {
-        this.__stack.push([start, stop]);
-    };
 
     executeRequest = () => {
-        const range = this.__stack.pop();
-        if (range) {
-            this.__stack = [];
-            const [start, stop] = range;
-            this.props.loadMore(start, stop - start || 1);
+        this.__batch = this.__stack;
+        this.__stack = [];
+        if (this.__batch.length) {
+            this.__fetching = this.length > BATCH_SIZE ? this.__batch.slice(1).slice(-BATCH_SIZE): this.__batch;
+            this.__batch = [];
+            Promise.all(this.__fetching.map(([begin, _])=> this.props.loadMore(begin, this.__pageSize))).then(() => this.__fetching = []);
         }
     };
 
@@ -247,7 +254,7 @@ export default class DataTable extends React.Component {
         const { findAll, meta } = this.props;
         const list = this.state.entity.get('list');
         if (!list.size || meta.entry !== this.state.entity.get('entry')) {
-            findAll(meta.entry, { p: meta.paging });
+            findAll(meta.entry, { p: { offset: 0, limit: meta.size} });
         }
     }
 
@@ -357,7 +364,7 @@ export default class DataTable extends React.Component {
             this.setState({ conditions, syntaxErr });
             const { findAll, meta } = this.props;
 
-            findAll(meta.entry, { ...conditions, p: meta.paging }, queryText);
+            findAll(meta.entry, { ...conditions, p: {offset: 0, limit: meta.size} }, queryText);
         } else {
             this.setState({ syntaxErr });
         }
