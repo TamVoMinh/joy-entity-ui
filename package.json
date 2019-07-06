@@ -14,7 +14,7 @@
     "start:api": "node example/api",
     "watch": "webpack --watch",
     "build": "webpack --mode development",
-    "build:component": "webpack --config webpack.component.config.js --progress -p --display-modules"
+    "build:component": "webpack --config webpack.component.config.js --progress -p"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.0",
