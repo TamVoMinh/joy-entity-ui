@@ -1,8 +1,7 @@
 import { combineReducers } from 'redux-immutable';
-import entityReducer from 'store/entity';
-import uiReducer from 'store/ui';
+import {ui, entity} from 'store';
 
 export default combineReducers({
-    ui: uiReducer,
-    entity: entityReducer
+    ui,
+    entity
 });

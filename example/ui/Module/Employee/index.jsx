@@ -182,17 +182,16 @@ const SubHeader = ({ title }) => {
 }
 export const Employee = () => {
     const title = "Employee";
+    const props ={
+        title,
+        meta, 
+        form: EmployeeModel(EmployeeForm),
+        useModal: true,
+        subheader: <SubHeader title={title}></SubHeader>
+    };
     return (
         <div className="container-fluid py-5 h-100 w-100">
-            {
-                ManageEntity({
-                    title,
-                    meta, 
-                    form: EmployeeModel(EmployeeForm),
-                    useModal: false,
-                    subheader: <SubHeader title={title}></SubHeader>
-                })
-            }
+            <ManageEntity {...props} />
         </div>
     );
 }

@@ -1,6 +1,15 @@
 import { Switch, Route, withRouter, Link } from 'react-router-dom';
-import  {ManageEntity}  from 'components';
-import connector from 'store/entity/connector';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import { ManageEntity }  from 'components';
+import { mapStateToPropsDefault, entityActions } from 'store';
 import * as api from './api';
 
-export default ManageEntity(Switch, Route, withRouter, Link, connector(api));
+const actions = entityActions(api);
+
+const mapDispatchToProps =  (dispatch, ownProps) => {
+    return bindActionCreators(actions,dispatch);
+};
+
+export default connect(mapStateToPropsDefault, mapDispatchToProps)(ManageEntity(Switch, Route, withRouter, Link));

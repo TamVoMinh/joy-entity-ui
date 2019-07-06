@@ -10,7 +10,7 @@ module.exports = {
     'webpack-dev-server/client?http://localhost:3000',
     'webpack/hot/only-dev-server'
   ],
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   module: {
     rules: [
       {

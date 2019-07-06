@@ -1,9 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
-import optimistic from 'store/middlewares/optimistic';
-import errorhandle from 'store/middlewares/errorhandler';
+import { middlewares } from 'store';
 import rootReducer from './root';
-
 const isProduction = process.env.NODE_ENV === 'production';
 
 let composeFn = null;
@@ -18,7 +16,7 @@ const configureStore = preloadedState => {
     const store = createStore(
         rootReducer,
         preloadedState,
-        composeFn(applyMiddleware(errorhandle, optimistic, thunk))
+        composeFn(applyMiddleware(middlewares.errorhandler, middlewares.optimistic, thunk))
     );
     return store;
 };

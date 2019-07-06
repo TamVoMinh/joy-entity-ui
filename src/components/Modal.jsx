@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Spinner } from './Spinner';
 
 export const ModalContext = React.createContext({
@@ -104,13 +103,8 @@ export const WithModal = component => {
     return wrapModal;
 };
 
-const mapStateToProps = (state, ownProps) => {
+export const mapStateToProps = (state, ownProps) => {
     return { ui: state.get('ui').toJS() };
 };
 
-export const ModalProvider = withRouter => withRouter(
-    connect(
-        mapStateToProps,
-        null
-    )(Provider)
-);
+export const ModalProvider = Provider;

@@ -15,7 +15,7 @@ import {
 import List from './List';
 import Details from './Details';
 
-const ManageEntity = (Switch, Route, withRouter, Link, connector) => {
+const ManageEntity = (Switch, Route, withRouter, Link) => {
     class ManageEntityComponent extends Component {
         static propTypes = {
             entity: object.isRequired,
@@ -66,6 +66,6 @@ const ManageEntity = (Switch, Route, withRouter, Link, connector) => {
             );
         }
     };
-    return withRouter(connector(ManageEntityComponent))
+    return withRouter(ManageEntityComponent);
 };
 export default ManageEntity;

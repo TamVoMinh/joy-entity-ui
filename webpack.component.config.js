@@ -47,13 +47,6 @@ var config = {
       amd: 'joy-query-box',
       umd: 'joy-query-box'
     },
-    'lodash.throttle': {
-      root: 'throttle',
-      commonjs: 'lodash.throttle',
-      commonjs2: 'lodash.throttle',
-      amd: 'lodash.throttle',
-      umd: 'lodash.throttle'
-    },
     'prop-types': {
       root: 'PropTypes',
       commonjs: 'prop-types',

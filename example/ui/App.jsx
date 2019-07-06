@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { hot } from 'react-hot-loader'
+import { Provider, connect } from 'react-redux';
+import { hot } from 'react-hot-loader';
 import './App.scss';
-import { ModalProvider } from 'components';
+import { ModalProvider, mapStateToProps } from 'components';
 import { Employee } from './Module/Employee';
 
-const ModalProviderWithRouter = ModalProvider(withRouter);
+const ModalProviderWithRouter = connect(mapStateToProps,null)(withRouter(ModalProvider));
 class App extends React.Component {
     render() {
         return (
