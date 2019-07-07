@@ -67,7 +67,7 @@ class Provider extends React.Component {
                                     </h5>
                                     <button
                                         type="button"
-                                        className="btn close"
+                                        className="close"
                                         data-dismiss="modal"
                                         aria-label="Close"
                                         onClick={this.closeModal}
