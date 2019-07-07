@@ -6,8 +6,22 @@ import { hashObject } from '../util';
 
 class List extends React.Component {
     render() {
-       return <DataTable {...this.props} openEditor={this.openEditor} />
+       return <DataTable {...this.props} onRowClick={this.handleRowClick} onRowDoubleClick={this.handleUpdateEntity} onNewEntityClick={this.handleNewEntity} />
     }
+
+    handleNewEntity = e => {
+        const { title, meta } = this.props;
+        this.openEditor(`Add New ${title}`, meta.default || {});
+    };
+
+    handleUpdateEntity = ({ rowData }) => {
+        const { title } = this.props;
+        this.openEditor(`Update ${title}`, rowData);
+    };
+
+    handleRowClick = ({ index, rowData }) => {
+        this.props.selectEntity(index, rowData.id);
+    };
 
     openEditor = async (title, data) => {
         const { openModal, form, useModal, history, match: { url } } = this.props;

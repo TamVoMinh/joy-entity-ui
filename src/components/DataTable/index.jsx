@@ -104,7 +104,10 @@ export default class DataTable extends React.Component {
         entity: instanceOf(Map),
         findAll: func.isRequired,
         loadMore: func.isRequired,
-        sortBy: func.isRequired
+        sortBy: func.isRequired,
+        onRowClick: func,
+        onRowDoubleClick: func,
+        onNewEntityClick: func
     };
 
     constructor(props, context) {
@@ -149,7 +152,7 @@ export default class DataTable extends React.Component {
         if (this.__batch.length) {
             this.__fetching = this.length > BATCH_SIZE ? this.__batch.slice(1).slice(-BATCH_SIZE): this.__batch;
             this.__batch = [];
-            Promise.all(this.__fetching.map(([begin, _])=> this.props.loadMore(begin, this.__pageSize))).then(() => this.__fetching = []);
+            Promise.all(this.__fetching.reverse().map(([begin, _])=> this.props.loadMore(begin, this.__pageSize))).then(() => this.__fetching = []);
         }
     };
 
@@ -194,7 +197,7 @@ export default class DataTable extends React.Component {
                             <div className="d-flex w-100 h-100 align-items-center justify-content-end text-primary">
                                 <button
                                     className="btn btn-sm btn-primary"
-                                    onClick={this.addNewItem}
+                                    onClick={this.props.onNewEntityClick}
                                 >
                                     Add {title}
                                 </button>
@@ -230,8 +233,8 @@ export default class DataTable extends React.Component {
                                         sortDirection={sortByDirection}
                                         scrollToIndex={scrollToIndex}
                                         width={width}
-                                        onRowDoubleClick={this.updateItem}
-                                        onRowClick={this.selecteItem}
+                                        onRowDoubleClick={this.props.onRowDoubleClick}
+                                        onRowClick={this.props.onRowClick}
                                         onRowsRendered={onRowsRendered}
                                     >
                                         {Columns(meta, this._headerRenderer, width)}
@@ -257,20 +260,6 @@ export default class DataTable extends React.Component {
             findAll(meta.entry, { p: { offset: 0, limit: meta.size} });
         }
     }
-
-    addNewItem = e => {
-        const { title, meta, openEditor } = this.props;
-        openEditor(`Add New ${title}`, meta.default || {});
-    };
-
-    updateItem = ({ rowData }) => {
-        const { title, openEditor } = this.props;
-        openEditor(`Update ${title}`, rowData);
-    };
-
-    selecteItem = ({ index, rowData }) => {
-        this.props.selectEntity(index, rowData.id);
-    };
 
     rowGetter = ({ index }) => this.state.entity.getIn(['list', index]) || {};
 
