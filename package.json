@@ -10,8 +10,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx webpack-dev-server --open",
-    "start:api": "node example/api",
+    "demo": "npx webpack-dev-server --open",
+    "api": "node example/api",
+    "start": "npm-run-all -p api demo",
     "watch": "webpack --watch",
     "build": "webpack --mode development",
     "build:component": "webpack --config webpack.component.config.js --progress -p"
@@ -40,6 +41,7 @@
     "koa-joi-router": "^6.0.0",
     "nanoid": "^2.0.3",
     "node-sass": "^4.12.0",
+    "npm-run-all": "^4.1.5",
     "object-diff": "0.0.4",
     "raw-loader": "^3.0.0",
     "react": "^16.8.6",

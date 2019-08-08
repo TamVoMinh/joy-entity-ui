@@ -14,7 +14,7 @@ Some React components which have been designed for serving basic CRUD actions to
 
 ## Install
 ```shell
-npm joy-ui
+npm i joy-ui
 ```
 
 ## Use
@@ -24,11 +24,7 @@ See in [example](https://github.com/TamVoMinh/joy-ui/tree/master/example)
 ```shell
 $ git clone https://github.com/TamVoMinh/joy-ui.git
 $ cd joy-ui
-$ npm install
-$ yarn start:api
-
-Open new terminal
-
+$ npm i
 $ yarn start
 ```
 ## Build component
