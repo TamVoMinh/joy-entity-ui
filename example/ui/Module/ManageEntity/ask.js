@@ -1,4 +1,3 @@
-import Cookies from 'js-cookie';
 import qs from 'qs';
 const  API_URL = 'http://localhost:3000';
 const DEFAULT_OPTIONS = {
@@ -24,8 +23,7 @@ export function ask({
 
     const headers = {
         ...DEFAULT_HEADERS,
-        ...options.headers,
-        authx: `Bearer ${Cookies.get('authx')}`
+        ...options.headers
     };
     const requestOptions = { ...DEFAULT_OPTIONS, ...options, headers };
 
