@@ -2,8 +2,8 @@
   "name": "joy-ui",
   "version": "0.0.1",
   "description": "",
-  "main": "lib/index.js",
-  "store": "lib/store.js",
+  "main": "build/index.js",
+  "store": "build/store.js",
   "directories": {
     "example": "example",
     "src": "src"

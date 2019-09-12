@@ -99,7 +99,7 @@ var config = {
     errorDetails: true
   },
   output: {
-    path: path.join(__dirname, './lib'),
+    path: path.join(__dirname, './build'),
     filename: '[name].js',
     library: 'joy-ui',
     libraryTarget: 'commonjs2'
