@@ -8,8 +8,6 @@ import * as api from './api';
 
 const actions = entityActions(api);
 
-const mapDispatchToProps =  (dispatch, ownProps) => {
-    return bindActionCreators(actions,dispatch);
-};
+const mapDispatchToProps = dispatch => bindActionCreators(actions,dispatch);
 
 export default connect(mapStateToPropsDefault, mapDispatchToProps)(ManageEntity(Switch, Route, withRouter, Link));
