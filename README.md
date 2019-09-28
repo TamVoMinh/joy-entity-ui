@@ -1,5 +1,5 @@
 # joy-ui
-Some React components which have been designed for serving basic CRUD actions to manage data.
+Basic React components for building backoffice functionalities.
 ![Example](/assets/joy-entity-ui.gif)
 
 ## Components
@@ -17,19 +17,13 @@ Some React components which have been designed for serving basic CRUD actions to
 npm i joy-ui
 ```
 
-## Use
-See in [example](https://github.com/TamVoMinh/joy-ui/tree/master/example)
+## How to use 
+Have look at [https://github.com/TamVoMinh/joy-ui-example.git](https://github.com/TamVoMinh/joy-ui-example.git)
 
-## Run demo
-```shell
-$ git clone https://github.com/TamVoMinh/joy-ui.git
-$ cd joy-ui
-$ npm i
-$ yarn start
-```
+
 ## Build component
 ```shell
-yarn build:component
+yarn build
 ```
 
 
