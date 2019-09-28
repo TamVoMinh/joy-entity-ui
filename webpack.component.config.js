@@ -1,5 +1,5 @@
-var path = require('path');
-var config = {
+const path = require('path');
+const config = {
   devtool: 'source-map',
   entry: {
     index: './src/components/index.js',
@@ -99,7 +99,7 @@ var config = {
     errorDetails: true
   },
   output: {
-    path: path.join(__dirname, './build'),
+    path: path.join(__dirname, '.'),
     filename: '[name].js',
     library: 'joy-ui',
     libraryTarget: 'commonjs2'
