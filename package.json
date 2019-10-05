@@ -1,6 +1,6 @@
 {
   "name": "joy-ui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "index.js",
   "directories": {
@@ -30,15 +30,15 @@
     "build": "webpack --config webpack.component.config.js --progress -p"
   },
   "dependencies": {
+    "formik": "^1.5.8",
     "immutable": "^4.0.0-rc.12",
-    "joy-query-box": "^1.1.5",
+    "joy-query-box": "^1.1.6",
     "lodash.debounce": "^4.0.8",
     "object-diff": "0.0.4",
     "prop-types": "^15.7.2",
     "react-datepicker": "^2.9.6",
     "react-draggable": "^4.0.3",
     "react-virtualized": "^9.21.1",
-    "formik": "^1.5.8",
     "yup": "^0.27.0"
   },
   "devDependencies": {

@@ -26,4 +26,8 @@ Have look at [https://github.com/TamVoMinh/joy-ui-example.git](https://github.co
 yarn build
 ```
 
+## Contribution
+Welcome any contribution from people to make joy-ui more useful & power!
 
+## License
+It's always [MIT](/LICENSE)
